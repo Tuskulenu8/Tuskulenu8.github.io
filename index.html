@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="lt" >
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tuskulėnų 8</title>
 </head>
 <style>
-    body {
+  body {
     background: black;
     margin: 0px;
     padding: 0px;
     text-align: center;
   }
-  #bg_image {
+  .bg{
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
   }
@@ -27,6 +31,8 @@
     position: absolute;
     transition: all 0.4s;
     height: 21%;
+    opacity: 0;
+    z-index: 5;
   }
   .enlarge{
     /*transform: translate(1%, 1%);*/
@@ -39,80 +45,72 @@
     padding-top: 4%;
     padding-bottom: 4%;
     z-index: 50;
+    opacity: 1;
 
+  }
   }
 </style>
 <body>
   <div class="container">
-    <image id="bg_image" src="https://tuskulenu8.github.io/bg_image.jpg">
+    <image id="bg_image" class="bg" src="https://tuskulenu8.github.io/bg_image.jpg">
+    <image id="overlay" class="bg" src="https://tuskulenu8.github.io/overlay.png">
 
-    <video id="video_9" class="videos" style="top: 13.5%; left: 29.75%;" playsinline="true" controls="true">
+    <video id="video_9" class="videos" style="top: 13.5%; left: 29.75%;" playsinline>
        <source src="https://tuskulenu8.github.io/9.mp4" type="video/mp4">
     </video>
 
-    <video id="video_8" class="videos" style="top: 13.5%; left: 42.35%;" playsinline="true" controls="true">
+    <video id="video_8" class="videos" style="top: 13.5%; left: 42.35%;" playsinline>
        <source src="https://tuskulenu8.github.io/8.mp4" type="video/mp4">
     </video>
 
-    <video id="video_7" class="videos" style="top: 13.5%; left: 54.95%;" playsinline="true" controls="true">
+    <video id="video_7" class="videos" style="top: 13.5%; left: 54.95%;" playsinline>
        <source src="https://tuskulenu8.github.io/7.mp4" type="video/mp4">
     </video>
 
-    <video id="video_6" class="videos" style="top: 34.5%; left: 29.75%;" playsinline="true" controls="true">
+    <video id="video_6" class="videos" style="top: 34.5%; left: 29.75%;" playsinline>
        <source src="https://tuskulenu8.github.io/6.mp4" type="video/mp4">
     </video>
 
-    <video id="video_5" class="videos" style="top: 34.5%; left: 42.35%;" playsinline="true" controls="true">
+    <video id="video_5" class="videos" style="top: 34.5%; left: 42.35%;" playsinline>
        <source src="https://tuskulenu8.github.io/5.mp4" type="video/mp4">
     </video>
 
-    <video id="video_4" class="videos" style="top: 34.5%; left: 54.95%;" playsinline="true" controls="true">
+    <video id="video_4" class="videos" style="top: 34.5%; left: 54.95%;" playsinline>
        <source src="https://tuskulenu8.github.io/4.mp4" type="video/mp4">
     </video>
 
-    <video id="video_3" class="videos" style="top: 55.5%; left: 29.75%;" playsinline="true" controls="true">
+    <video id="video_3" class="videos" style="top: 55.5%; left: 29.75%;" playsinline>
        <source src="https://tuskulenu8.github.io/3.mp4" type="video/mp4">
     </video>
 
-    <video id="video_2" class="videos" style="top: 55.5%; left: 42.35%;" playsinline="true" controls="true">
+    <video id="video_2" class="videos" style="top: 55.5%; left: 42.35%;" playsinline>
        <source src="https://tuskulenu8.github.io/2.mp4" type="video/mp4">
     </video>
 
-    <video id="video_1" class="videos" style="top: 55.5%; left: 54.95%;" playsinline="true" controls="true">
+    <video id="video_1" class="videos" style="top: 55.5%; left: 54.95%;" playsinline>
        <source src="https://tuskulenu8.github.io/1.mp4" type="video/mp4">
     </video>
   </div>
     
   <script>
-        /*var vid = document.getElementById("video_9");
-      vid.onplay = function() {
-      vid.classList.add("enlarge");
-      }
-    vid.onended = function(){
-        vid.classList.remove("enlarge");
-        vid.currentTime = 0;
-      }
-    */
     var videos = document.getElementsByClassName("videos");
 
     var onPlay = function() {
         this.classList.add("enlarge");
-    };
-
+    }
+    var onEnd = function() {
+        this.classList.remove("enlarge");
+    }
+    var onClick = function() {
+        this.play();
+    }
+    
+    for (var i = 0; i < videos.length; i++) {
+        videos[i].addEventListener('click', onClick);
+    }
     for (var i = 0; i < videos.length; i++) {
         videos[i].addEventListener('play', onPlay);
     }
-
-    var onEnd = function() {
-        this.classList.remove("enlarge");
-        this.currentTime = 0;
-        if (this.exitFullscreen) {
-          this.exitFullscreen();
-        } else if (this.webkitExitFullScreen) { /* Safari */
-          this.webkitExitFullScreen();
-        }
-    };
-
     for (var i = 0; i < videos.length; i++) {
         videos[i].addEventListener('ended', onEnd);
     }
