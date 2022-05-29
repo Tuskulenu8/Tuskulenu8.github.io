@@ -1,42 +1,121 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="lt" >
 <head>
   <meta charset="UTF-8">
-  <title>birdflu</title>
+  <title>Tuskulėnų 8</title>
 </head>
 <style>
-  body {
+    body {
     background: black;
-    margin: 0;
-    padding: 0;
-    height: 100vh; /* Full height */
-  }
-    
-  .overlay {
-    font-size: 1rem;
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    margin: 0px;
+    padding: 0px;
     text-align: center;
-    padding-top: 40vh;
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto;
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
-  #icon{
-    height: 15%;
-    fill: white;
+  #bg_image {
+    width: 100%;
+    height: 100%;
+  }
+  .container {
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    height: 60vw;
+    width: 100vw;
+  }
+  .videos{
+    position: absolute;
+    transition: all 0.4s;
+    height: 21%;
+  }
+  .enlarge{
+    /*transform: translate(1%, 1%);*/
+    height: 92%;
+    top: 0% !important;
+    left: 0% !important;
+    background-color: rgba(0,0,0,0.5);
+    padding-left: 22.4%;
+    padding-right: 22.4%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    z-index: 50;
+
   }
 </style>
 <body>
-  TEST TEST TEST
-  
-  <script>
+  <div class="container">
+    <image id="bg_image" src="https://tuskulenu8.github.io/bg_image.jpg">
 
+    <video id="video_9" class="videos" style="top: 13.5%; left: 29.75%;" playsinline="true" controls="true">
+       <source src="https://tuskulenu8.github.io/9.mp4" type="video/mp4">
+    </video>
+
+    <video id="video_8" class="videos" style="top: 13.5%; left: 42.35%;" playsinline="true" controls="true">
+       <source src="https://tuskulenu8.github.io/8.mp4" type="video/mp4">
+    </video>
+
+    <video id="video_7" class="videos" style="top: 13.5%; left: 54.95%;" playsinline="true" controls="true">
+       <source src="https://tuskulenu8.github.io/7.mp4" type="video/mp4">
+    </video>
+
+    <video id="video_6" class="videos" style="top: 34.5%; left: 29.75%;" playsinline="true" controls="true">
+       <source src="https://tuskulenu8.github.io/6.mp4" type="video/mp4">
+    </video>
+
+    <video id="video_5" class="videos" style="top: 34.5%; left: 42.35%;" playsinline="true" controls="true">
+       <source src="https://tuskulenu8.github.io/5.mp4" type="video/mp4">
+    </video>
+
+    <video id="video_4" class="videos" style="top: 34.5%; left: 54.95%;" playsinline="true" controls="true">
+       <source src="https://tuskulenu8.github.io/4.mp4" type="video/mp4">
+    </video>
+
+    <video id="video_3" class="videos" style="top: 55.5%; left: 29.75%;" playsinline="true" controls="true">
+       <source src="https://tuskulenu8.github.io/3.mp4" type="video/mp4">
+    </video>
+
+    <video id="video_2" class="videos" style="top: 55.5%; left: 42.35%;" playsinline="true" controls="true">
+       <source src="https://tuskulenu8.github.io/2.mp4" type="video/mp4">
+    </video>
+
+    <video id="video_1" class="videos" style="top: 55.5%; left: 54.95%;" playsinline="true" controls="true">
+       <source src="https://tuskulenu8.github.io/1.mp4" type="video/mp4">
+    </video>
+  </div>
+    
+  <script>
+        /*var vid = document.getElementById("video_9");
+      vid.onplay = function() {
+      vid.classList.add("enlarge");
+      }
+    vid.onended = function(){
+        vid.classList.remove("enlarge");
+        vid.currentTime = 0;
+      }
+    */
+    var videos = document.getElementsByClassName("videos");
+
+    var onPlay = function() {
+        this.classList.add("enlarge");
+    };
+
+    for (var i = 0; i < videos.length; i++) {
+        videos[i].addEventListener('play', onPlay);
+    }
+
+    var onEnd = function() {
+        this.classList.remove("enlarge");
+        this.currentTime = 0;
+        if (this.exitFullscreen) {
+          this.exitFullscreen();
+        } else if (this.webkitExitFullScreen) { /* Safari */
+          this.webkitExitFullScreen();
+        }
+    };
+
+    for (var i = 0; i < videos.length; i++) {
+        videos[i].addEventListener('ended', onEnd);
+    }
   </script>
-  
 </body
 </html>
