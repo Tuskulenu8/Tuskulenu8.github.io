@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuskulėnų 8</title>
+</head>
+<style>
+    body {
+    background: black;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    overflow: hidden; 
+  }
+  #fullscreen{
+    z-index: 100;
+    font-size: 1vw;
+    position: fixed;
+    left: 5%;
+    top: 5%;
+  }
+  .bg{
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+  .container {
+    position: absolute;
+    box-sizing: border-box;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    height: 60vw;
+    width: 100vw;
+    margin: 0px;
+    padding: 0px;
+  }
+  .videos{
+    position: absolute;
+    transition: all 0.6s;
+    height: 21%;
+    opacity: 0;
+    z-index: 5;
+  }
+  .enlarge{
+    /*transform: translate(1%, 1%);*/
+    height: 92%;
+    top: 0% !important;
+    left: 0% !important;
+    background-color: rgba(0,0,0,0.5);
+    padding-left: 22.4%;
+    padding-right: 22.4%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    z-index: 50;
+    opacity: 1;
+  }
+</style>
+<body>
+  <button type="button" id="fullscreen" onclick="go_fullscreen()"> Fullscreen </button> 
+  
+  <div class="container">
+    <image id="bg_image" class="bg" src="https://tuskulenu8.github.io/bg_image.jpg">
+    <image id="overlay" class="bg" src="https://tuskulenu8.github.io/overlay.png">
+
+    <video id="video_9" class="videos" style="top: 13.5%; left: 29.75%;" playsinline>
+       <source src="9.webm" type="video/webm">
+    </video>
+
+    <video id="video_8" class="videos" style="top: 13.5%; left: 42.35%;" playsinline>
+       <source src="8.webm" type="video/webm">
+    </video>
+
+    <video id="video_7" class="videos" style="top: 13.5%; left: 54.95%;" playsinline>
+       <source src="7.webm" type="video/webm">
+    </video>
+
+    <video id="video_6" class="videos" style="top: 34.5%; left: 29.75%;" playsinline>
+       <source src="6.webm" type="video/webm">
+    </video>
+
+    <video id="video_5" class="videos" style="top: 34.5%; left: 42.35%;" playsinline>
+       <source src="5.webm" type="video/webm">
+    </video>
+
+    <video id="video_4" class="videos" style="top: 34.5%; left: 54.95%;" playsinline>
+       <source src="4.webm" type="video/webm">
+    </video>
+
+    <video id="video_3" class="videos" style="top: 55.5%; left: 29.75%;" playsinline>
+       <source src="3.webm" type="video/webm">
+    </video>
+
+    <video id="video_2" class="videos" style="top: 55.5%; left: 42.35%;" playsinline>
+       <source src="2.webm" type="video/webm">
+    </video>
+
+    <video id="video_1" class="videos" style="top: 55.5%; left: 54.95%;" playsinline>
+       <source src="1.webm" type="video/webm">
+    </video>
+  </div>
+    
+  <script>
+      var videos = document.getElementsByClassName("videos");
+
+      var onPlay = function() {
+          this.classList.add("enlarge");
+      }
+      var onEnd = function() {
+          this.classList.remove("enlarge");
+      }
+      var onClick = function() {
+          this.play();
+      }
+
+      for (var i = 0; i < videos.length; i++) {
+          videos[i].addEventListener('click', onClick);
+      }
+      for (var i = 0; i < videos.length; i++) {
+          videos[i].addEventListener('play', onPlay);
+      }
+      for (var i = 0; i < videos.length; i++) {
+          videos[i].addEventListener('ended', onEnd);
+      }
+
+  document.fullscreenEnabled =
+    document.fullscreenEnabled ||
+    document.mozFullScreenEnabled ||
+    document.documentElement.webkitRequestFullScreen;
+
+  function requestFullscreen(element) {
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullScreen) {
+      element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+    }
+  }
+
+  function go_fullscreen(){
+    if (document.fullscreenEnabled) {
+      requestFullscreen(document.documentElement);
+    }
+    document.getElementById("fullscreen").style.display = "none";
+  }
+  </script>
+</body
+</html>
