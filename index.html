@@ -6,30 +6,44 @@
   <title>Tuskulėnų 8</title>
 </head>
 <style>
-  body {
+    body {
     background: black;
     margin: 0px;
     padding: 0px;
     text-align: center;
+    overflow: hidden; 
+  }
+  #fullscreen{
+    z-index: 100;
+    font-size: 1vw;
+    position: fixed;
+    left: 5%;
+    top: 5%;
   }
   .bg{
     position: absolute;
+    box-sizing: border-box;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    margin: 0px;
+    padding: 0px;
   }
   .container {
     position: absolute;
+    box-sizing: border-box;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
     height: 60vw;
     width: 100vw;
+    margin: 0px;
+    padding: 0px;
   }
   .videos{
     position: absolute;
-    transition: all 0.4s;
+    transition: all 0.6s;
     height: 21%;
     opacity: 0;
     z-index: 5;
@@ -46,11 +60,11 @@
     padding-bottom: 4%;
     z-index: 50;
     opacity: 1;
-
-  }
   }
 </style>
 <body>
+  <button type="button" id="fullscreen" onclick="go_fullscreen()"> Fullscreen </button> 
+  
   <div class="container">
     <image id="bg_image" class="bg" src="https://tuskulenu8.github.io/bg_image.jpg">
     <image id="overlay" class="bg" src="https://tuskulenu8.github.io/overlay.png">
@@ -93,27 +107,49 @@
   </div>
     
   <script>
-    var videos = document.getElementsByClassName("videos");
+      var videos = document.getElementsByClassName("videos");
 
-    var onPlay = function() {
-        this.classList.add("enlarge");
+      var onPlay = function() {
+          this.classList.add("enlarge");
+      }
+      var onEnd = function() {
+          this.classList.remove("enlarge");
+      }
+      var onClick = function() {
+          this.play();
+      }
+
+      for (var i = 0; i < videos.length; i++) {
+          videos[i].addEventListener('click', onClick);
+      }
+      for (var i = 0; i < videos.length; i++) {
+          videos[i].addEventListener('play', onPlay);
+      }
+      for (var i = 0; i < videos.length; i++) {
+          videos[i].addEventListener('ended', onEnd);
+      }
+
+  document.fullscreenEnabled =
+    document.fullscreenEnabled ||
+    document.mozFullScreenEnabled ||
+    document.documentElement.webkitRequestFullScreen;
+
+  function requestFullscreen(element) {
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullScreen) {
+      element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
     }
-    var onEnd = function() {
-        this.classList.remove("enlarge");
+  }
+
+  function go_fullscreen(){
+    if (document.fullscreenEnabled) {
+      requestFullscreen(document.documentElement);
     }
-    var onClick = function() {
-        this.play();
-    }
-    
-    for (var i = 0; i < videos.length; i++) {
-        videos[i].addEventListener('click', onClick);
-    }
-    for (var i = 0; i < videos.length; i++) {
-        videos[i].addEventListener('play', onPlay);
-    }
-    for (var i = 0; i < videos.length; i++) {
-        videos[i].addEventListener('ended', onEnd);
-    }
+    document.getElementById("fullscreen").style.display = "none";
+  }
   </script>
 </body
 </html>
