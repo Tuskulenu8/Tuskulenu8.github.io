@@ -61,9 +61,24 @@
     z-index: 50;
     opacity: 1;
   }
+  #credits{
+    z-index: 1;
+    color: gray;
+    text-align: right;
+    font-size: 0.75vw;
+    font-family: arial;
+    position: fixed;
+    right: 2%;
+    bottom: 3%;
+  }
 </style>
 <body>
   <button type="button" id="fullscreen" onclick="go_fullscreen()"> Fullscreen </button> 
+  <div id='credits'>
+    Animation - Benedikta Rukaitė <br>
+    Sound - Aušra Venckutė <br>
+    Web page - Aurelijus Čiupas
+  </div>
   
   <div class="container">
     <image id="bg_image" class="bg" src="https://tuskulenu8.github.io/bg_image.jpg">
